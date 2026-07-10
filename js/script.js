@@ -4,6 +4,8 @@ document.addEventListener("DOMContentLoaded", function () {
   const institucionWrapper = document.getElementById("institucion-wrapper");
   const institucionInput = document.getElementById("institucion");
   const msg = document.getElementById("form-msg");
+  const submitBtn = form.querySelector("button[type=submit]");
+  const submitBtnDefaultText = submitBtn.textContent;
 
   esEstudianteCheckbox.addEventListener("change", function () {
     const isStudent = esEstudianteCheckbox.checked;
@@ -31,6 +33,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     const data = {
+      "_subject": "Nueva cotización - Terrawind Asistencias",
       "Nombre completo": document.getElementById("nombre").value.trim(),
       "Edad": document.getElementById("edad").value,
       "Tipo de asistencia": document.getElementById("tipo_asistencia").value,
@@ -47,30 +50,35 @@ document.addEventListener("DOMContentLoaded", function () {
       "Fecha de solicitud": new Date().toLocaleString("es-CO")
     };
 
-    try {
-      downloadAsExcel(data);
-      msg.textContent = "¡Listo! Hemos recibido tu solicitud. Te contactaremos pronto vía WhatsApp o correo electrónico.";
-      form.reset();
-      institucionWrapper.hidden = true;
-      institucionInput.required = false;
-    } catch (err) {
-      msg.textContent = "No se pudo procesar tu solicitud. Intenta de nuevo.";
-      msg.classList.add("error");
-      console.error(err);
-    }
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Enviando...";
+
+    fetch(form.action, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      body: JSON.stringify(data)
+    })
+      .then(function (response) {
+        if (response.ok) {
+          msg.textContent = "¡Listo! Hemos recibido tu solicitud. Te contactaremos pronto vía WhatsApp o correo electrónico.";
+          form.reset();
+          institucionWrapper.hidden = true;
+          institucionInput.required = false;
+        } else {
+          throw new Error("Formspree respondió con error");
+        }
+      })
+      .catch(function (err) {
+        msg.textContent = "No se pudo enviar tu solicitud. Por favor intenta de nuevo o escríbenos por WhatsApp.";
+        msg.classList.add("error");
+        console.error(err);
+      })
+      .finally(function () {
+        submitBtn.disabled = false;
+        submitBtn.textContent = submitBtnDefaultText;
+      });
   });
-
-  function downloadAsExcel(data) {
-    const worksheet = XLSX.utils.json_to_sheet([data]);
-    worksheet["!cols"] = Object.keys(data).map(() => ({ wch: 28 }));
-
-    const workbook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(workbook, worksheet, "Cotización");
-
-    const nombreArchivo = "cotizacion_" +
-      (data["Nombre completo"] || "solicitud").replace(/\s+/g, "_") +
-      "_" + new Date().toISOString().slice(0, 10) + ".xlsx";
-
-    XLSX.writeFile(workbook, nombreArchivo);
-  }
 });
