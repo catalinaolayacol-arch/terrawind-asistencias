@@ -49,12 +49,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
     try {
       downloadAsExcel(data);
-      msg.textContent = "¡Listo! Tu solicitud se descargó en Excel. Te contactaremos pronto.";
+      msg.textContent = "¡Listo! Hemos recibido tu solicitud. Te contactaremos pronto vía WhatsApp o correo electrónico.";
       form.reset();
       institucionWrapper.hidden = true;
       institucionInput.required = false;
     } catch (err) {
-      msg.textContent = "No se pudo generar el archivo Excel. Intenta de nuevo.";
+      msg.textContent = "No se pudo procesar tu solicitud. Intenta de nuevo.";
       msg.classList.add("error");
       console.error(err);
     }
