@@ -55,14 +55,14 @@ ul { list-style: none; margin: 0; padding: 0; }
   position: sticky;
   top: 0;
   z-index: 50;
-  min-height: 88px;
+  min-height: 112px;
 }
 .navbar-inner {
   display: flex;
   align-items: center;
   justify-content: flex-end;
   padding: 14px 24px;
-  min-height: 88px;
+  min-height: 112px;
   gap: 20px;
 }
 .logo {
@@ -92,14 +92,7 @@ ul { list-style: none; margin: 0; padding: 0; }
   z-index: 1;
 }
 .logo-invedu .logo-img {
-  height: 64px;
-}
-.logo-tagline {
-  font-size: 10.5px;
-  font-weight: 600;
-  line-height: 1.35;
-  color: var(--text-muted);
-  letter-spacing: 0.01em;
+  height: 88px;
 }
 .nav-links {
   display: flex;
@@ -231,6 +224,17 @@ ul { list-style: none; margin: 0; padding: 0; }
 .hero-photo-card span {
   color: var(--text-muted);
   font-size: 13px;
+}
+.hero-photo-caption {
+  margin: 16px 0 0;
+  text-align: center;
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--navy);
+  background: var(--blue-light);
+  border: 1px solid var(--blue-mid);
+  border-radius: 999px;
+  padding: 10px 18px;
 }
 
 /* ===== SECTIONS ===== */
@@ -513,14 +517,13 @@ ul { list-style: none; margin: 0; padding: 0; }
 }
 @media (max-width: 720px) {
   .navbar-inner { flex-wrap: wrap; row-gap: 10px; padding-top: 10px; }
-  .logo-tagline { display: none; }
   .navbar, .navbar-inner { min-height: 0; }
   .logo-invedu {
     position: static;
     transform: none;
     padding: 10px 24px 0;
   }
-  .logo-invedu .logo-img { height: 44px; }
+  .logo-invedu .logo-img { height: 56px; }
 }
 @media (max-width: 560px) {
   .cards-grid { grid-template-columns: 1fr; }
