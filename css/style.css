@@ -55,12 +55,14 @@ ul { list-style: none; margin: 0; padding: 0; }
   position: sticky;
   top: 0;
   z-index: 50;
+  min-height: 88px;
 }
 .navbar-inner {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
   padding: 14px 24px;
+  min-height: 88px;
   gap: 20px;
 }
 .logo {
@@ -81,8 +83,16 @@ ul { list-style: none; margin: 0; padding: 0; }
   display: block;
 }
 .logo-invedu {
-  gap: 10px;
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  gap: 12px;
   flex-shrink: 0;
+  z-index: 1;
+}
+.logo-invedu .logo-img {
+  height: 64px;
 }
 .logo-tagline {
   font-size: 10.5px;
@@ -502,8 +512,15 @@ ul { list-style: none; margin: 0; padding: 0; }
   .footer-brand { flex-wrap: wrap; }
 }
 @media (max-width: 720px) {
-  .navbar-inner { flex-wrap: wrap; row-gap: 10px; }
+  .navbar-inner { flex-wrap: wrap; row-gap: 10px; padding-top: 10px; }
   .logo-tagline { display: none; }
+  .navbar, .navbar-inner { min-height: 0; }
+  .logo-invedu {
+    position: static;
+    transform: none;
+    padding: 10px 24px 0;
+  }
+  .logo-invedu .logo-img { height: 44px; }
 }
 @media (max-width: 560px) {
   .cards-grid { grid-template-columns: 1fr; }
