@@ -229,22 +229,38 @@ ul { list-style: none; margin: 0; padding: 0; }
   margin: 14px 6px 0;
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 8px;
-  text-align: center;
-  font-weight: 700;
-  font-size: 14px;
-  letter-spacing: 0.01em;
-  color: var(--white);
+  gap: 14px;
   background: linear-gradient(135deg, var(--navy) 0%, var(--blue) 100%);
   border-radius: var(--radius);
   padding: 14px 20px;
   box-shadow: var(--shadow);
 }
-.hero-photo-caption::before {
-  content: "⭐";
+.hero-photo-caption-icon {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 17px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 50%;
+}
+.hero-photo-caption-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.hero-photo-caption-text strong {
+  color: var(--white);
   font-size: 15px;
-  line-height: 1;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+}
+.hero-photo-caption-text span {
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 12.5px;
+  font-weight: 500;
 }
 
 /* ===== SECTIONS ===== */
